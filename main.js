@@ -6,8 +6,8 @@ app.on('ready', () => {
   console.log('Aplicação iniciada! \\O/');
 
   let mainWindow = new BrowserWindow({
-    width: 600,
-    height: 400,
+    width: 800,
+    height: 420,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
     }
