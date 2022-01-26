@@ -1,5 +1,5 @@
 const jsonFile = require('jsonfile-promised')
-const { existsSync } = require('fs')
+const { existsSync, readdirSync } = require('fs')
 const path = require('path')
 
 module.exports = {
@@ -46,5 +46,15 @@ module.exports = {
   pegaDados(curso) {
     let arquivoDoCurso = path.join(__dirname, `data/${curso}.json`)
     return jsonFile.readFile(arquivoDoCurso);
+  },
+
+  getNomeCursos() {
+    let arquivos = readdirSync(path.join(__dirname, 'data'));
+
+    let cursos = arquivos
+      .filter(nome => /.\.json/g.test(nome))
+      .map(nome => nome.replace('.json', ''))
+
+    return cursos;
   }
 }
