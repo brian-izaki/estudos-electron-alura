@@ -1,11 +1,12 @@
 import { Duration } from './libs/luxon.min.js';
 
 let _segundos = 0;
+let tempo;
 let interval;
 
 const timer = {
   iniciar(el) {
-    let tempo = Duration.fromISOTime(el.textContent)
+    tempo = Duration.fromISOTime(el.textContent)
     _segundos = tempo.seconds;
 
     interval = setInterval(() => {
@@ -19,9 +20,11 @@ const timer = {
     return Duration.fromObject({ seconds: segundos }).toFormat('hh:mm:ss')
   },
 
-  parar(el) {
+  parar(cursoEl) {
     clearInterval(interval);
-    _segundos = 0;
+    let tempoEstudado = this.segundosParaTempo(_segundos);
+
+    window.savingTimer.stopCourse(cursoEl.textContent, tempoEstudado);
   }
 }
 

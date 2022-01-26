@@ -14,3 +14,7 @@ contextBridge.exposeInMainWorld('shell', {
 contextBridge.exposeInMainWorld('projectStatus', {
   versions: process.versions
 })
+
+contextBridge.exposeInMainWorld('savingTimer', {
+  stopCourse: (curso, tempoEstudado) => ipcRenderer.send('curso-parado', curso, tempoEstudado)
+})

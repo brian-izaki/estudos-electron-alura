@@ -1,6 +1,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 
-const path = require('path')
+const path = require('path');
+const data = require('./data');
 
 app.on('ready', () => {
   console.log('Aplicação iniciada! \\O/');
@@ -44,6 +45,10 @@ ipcMain.on('abrir-janela-sobre', () => {
 
 ipcMain.on('fechar-janela-sobre', () => {
   sobreWindow.close();
+})
+
+ipcMain.on('curso-parado', (e, curso, tempoEstudado) => {
+  data.salvaDados(curso, tempoEstudado);
 })
 
 console.log('\tserá mostrado antes do ready...\n')
