@@ -6,8 +6,10 @@ let interval;
 
 const timer = {
   iniciar(el) {
-    tempo = Duration.fromISOTime(el.textContent)
-    _segundos = tempo.seconds;
+    tempo = Duration.fromISOTime(el.textContent).toFormat('s')
+    _segundos = tempo;
+
+    console.log(_segundos);
 
     interval = setInterval(() => {
       _segundos++;
