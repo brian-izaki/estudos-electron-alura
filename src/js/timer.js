@@ -22,7 +22,6 @@ const timer = {
   parar(el) {
     clearInterval(interval);
     _segundos = 0;
-    el.textContent = Duration.fromObject({ hours: 0, minutes: 0, seconds: 0 }).toFormat('hh:mm:ss')
   }
 }
 
