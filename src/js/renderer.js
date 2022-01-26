@@ -5,6 +5,16 @@ let botaoPlay = document.querySelector('.botao-play');
 let tempo = document.querySelector('.tempo');
 let curso = document.querySelector('.curso');
 
+window.onload = async () => {
+  try {
+    const tempoJson = await window.data.getDadosCurso(curso.textContent);
+    
+    tempo.textContent = tempoJson.tempoEstudo || '00:00:00';
+  } catch (err) {
+    console.error(err)
+  }
+}
+
 link.addEventListener('click', (e) => {
   window.janelas.abrirJanelaSobre()
 })

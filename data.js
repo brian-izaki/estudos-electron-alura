@@ -22,7 +22,7 @@ module.exports = {
   async adicionaTempoAoCurso(arquivoCurso, tempo) {
     let dados = {
       ultimoTempoEstudo: new Date().toString(),
-      tempoEsutdo: tempo,
+      tempoEstudo: tempo,
     }
 
     try {
@@ -41,5 +41,10 @@ module.exports = {
     } catch (err) {
       console.error(err)
     }
+  },
+
+  pegaDados(curso) {
+    let arquivoDoCurso = path.join(__dirname, `data/${curso}.json`)
+    return jsonFile.readFile(arquivoDoCurso);
   }
 }

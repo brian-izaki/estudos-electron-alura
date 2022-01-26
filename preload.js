@@ -1,6 +1,7 @@
 const { contextBridge, ipcRenderer } = require('electron')
 const { shell } = require('electron/common')
 const process = require('process')
+const data = require('./data')
 
 contextBridge.exposeInMainWorld('janelas', {
   abrirJanelaSobre: () => ipcRenderer.send('abrir-janela-sobre'),
@@ -17,4 +18,8 @@ contextBridge.exposeInMainWorld('projectStatus', {
 
 contextBridge.exposeInMainWorld('savingTimer', {
   stopCourse: (curso, tempoEstudado) => ipcRenderer.send('curso-parado', curso, tempoEstudado)
+})
+
+contextBridge.exposeInMainWorld('data', {
+  getDadosCurso: (curso) => data.pegaDados(curso)
 })
