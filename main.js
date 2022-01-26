@@ -1,8 +1,9 @@
-const { app, BrowserWindow, ipcMain } = require('electron');
+const { app, BrowserWindow, ipcMain, Tray } = require('electron');
 
 const path = require('path');
 const data = require('./data');
 
+let tray = null;
 app.on('ready', () => {
   console.log('Aplicação iniciada! \\O/');
 
@@ -13,6 +14,8 @@ app.on('ready', () => {
       preload: path.join(__dirname, 'preload.js')
     }
   })
+
+  tray = new Tray(`${__dirname}/src/img/icon-tray.png`);
 
   mainWindow.loadURL(`file://${__dirname}/src/index.html`)
 
