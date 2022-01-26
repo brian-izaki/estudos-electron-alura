@@ -1,7 +1,7 @@
 const data = require("./data");
 
 module.exports = {
-    geraTrayTemplate() {
+    geraTrayTemplate(mainWindow) {
         let template = [
             { label: 'Cursos', },
             { type: 'separator' },
@@ -9,7 +9,13 @@ module.exports = {
         let cursos = data.getNomeCursos();
 
         cursos.forEach(curso => {
-            let menuItem = { label: curso, type: 'radio'}
+            let menuItem = {
+                label: curso,
+                type: 'radio',
+                click: () => {
+                    mainWindow.webContents.send('tray-selected', { curso })
+                }
+            }
             template.push(menuItem);
         })
 

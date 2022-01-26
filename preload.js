@@ -23,3 +23,11 @@ contextBridge.exposeInMainWorld('savingTimer', {
 contextBridge.exposeInMainWorld('data', {
   getDadosCurso: (curso) => data.pegaDados(curso)
 })
+
+contextBridge.exposeInMainWorld('mainEvents', {
+  onTray: {
+    selectedCourse: (callback) => ipcRenderer.on('tray-selected', (event, message) => {
+      callback(message)
+    })
+  }
+})

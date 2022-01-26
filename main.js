@@ -5,13 +5,6 @@ const data = require('./data');
 const template = require('./template');
 
 let tray = null;
-const buildTray = () => {
-  tray = new Tray(`${__dirname}/src/img/icon-tray.png`);
-  const templateGenerator = template.geraTrayTemplate();
-  let trayMenu = Menu.buildFromTemplate(templateGenerator)
-  tray.setContextMenu(trayMenu);
-}
-
 app.on('ready', () => {
   console.log('Aplicação iniciada! \\O/');
 
@@ -23,7 +16,10 @@ app.on('ready', () => {
     }
   })
 
-  buildTray();
+  tray = new Tray(`${__dirname}/src/img/icon-tray.png`);
+  const templateGenerator = template.geraTrayTemplate(mainWindow);
+  let trayMenu = Menu.buildFromTemplate(templateGenerator)
+  tray.setContextMenu(trayMenu);
 
   mainWindow.loadURL(`file://${__dirname}/src/index.html`)
 
