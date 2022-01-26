@@ -21,7 +21,8 @@ contextBridge.exposeInMainWorld('savingTimer', {
 })
 
 contextBridge.exposeInMainWorld('data', {
-  getDadosCurso: (curso) => data.pegaDados(curso)
+  getDadosCurso: (curso) => data.pegaDados(curso),
+  cursoAdicionado: (curso) => ipcRenderer.send('curso-adicionado', curso),
 })
 
 contextBridge.exposeInMainWorld('mainEvents', {

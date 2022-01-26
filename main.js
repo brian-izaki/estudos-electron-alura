@@ -4,11 +4,13 @@ const path = require('path');
 const data = require('./data');
 const template = require('./template');
 
+let mainWindow = null;
+
 let tray = null;
 app.on('ready', () => {
   console.log('Aplicação iniciada! \\O/');
 
-  let mainWindow = new BrowserWindow({
+  mainWindow = new BrowserWindow({
     width: 800,
     height: 420,
     webPreferences: {
@@ -56,6 +58,13 @@ ipcMain.on('fechar-janela-sobre', () => {
 
 ipcMain.on('curso-parado', (e, curso, tempoEstudado) => {
   data.salvaDados(curso, tempoEstudado);
+})
+
+ipcMain.on('curso-adicionado', (e, curso) => {
+  let novoTemplate = template.adicionaCursoTray(mainWindow, curso);
+  let novoTrayMenu = Menu.buildFromTemplate(novoTemplate);
+  tray.setContextMenu(novoTrayMenu);
+
 })
 
 console.log('\tserá mostrado antes do ready...\n')
