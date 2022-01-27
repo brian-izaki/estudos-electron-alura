@@ -56,3 +56,7 @@ async function carregaCurso () {
     console.error(err)
   }
 }
+
+window.shortcuts.stopPlayTimer(() => {
+  botaoPlay.click()
+})

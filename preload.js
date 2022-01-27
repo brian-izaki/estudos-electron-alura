@@ -32,3 +32,9 @@ contextBridge.exposeInMainWorld('mainEvents', {
     })
   }
 })
+
+contextBridge.exposeInMainWorld('shortcuts', {
+  stopPlayTimer: (callback) => ipcRenderer.on('atalho-iniciar-parar', (event) => {
+    callback();
+  })
+})
