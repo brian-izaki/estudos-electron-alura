@@ -31,7 +31,7 @@ app.on('ready', () => {
     mainWindow.webContents.send('atalho-iniciar-parar')
   })
 
-  mainWindow.webContents.openDevTools();
+  process.env.NODE_ENV === 'development' && mainWindow.webContents.openDevTools();
   mainWindow.loadURL(`file://${__dirname}/src/index.html`)
 
 })
