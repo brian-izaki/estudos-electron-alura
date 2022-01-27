@@ -28,9 +28,17 @@ botaoPlay.addEventListener('click', (e) => {
   if (isPlay) {
     timer.parar(curso)
     isPlay = false
+    new Notification(`Alura timer`, {
+      body: `O curso ${curso.textContent} foi pausado!!`,
+      icon: 'img/stop-button.png',
+    })
   } else {
     timer.iniciar(tempo)
     isPlay = true
+    new Notification(`Alura timer`, {
+      body: `O curso ${curso.textContent} foi iniciado!!`,
+      icon: 'img/play-button.png',
+    })
   }
   
   imgs = imgs.reverse();
