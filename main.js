@@ -15,7 +15,7 @@ app.on('ready', () => {
     height: 420,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js')
-    }
+    },
   })
 
   tray = new Tray(`${__dirname}/src/img/icon-tray.png`);
@@ -23,27 +23,11 @@ app.on('ready', () => {
   let trayMenu = Menu.buildFromTemplate(templateGenerator)
   tray.setContextMenu(trayMenu);
 
-  let templateMenu = [
-    {
-      label: 'Meu menu',
-      submenu: [
-        { label: 'item 1', },
-        { label: 'item 2' },
-        { label: 'item 3' },
-      ]
-    }
-  ]
-  if (process.platform === 'darwin') {
-    templateMenu.unshift({
-      label: app.getName(),
-      submenu: [
-        { label: 'item 1' }
-      ]
-    })
-  }
+  let templateMenu = template.geraMenuPrincipalTemplate(app)
   const menuPrincipal = Menu.buildFromTemplate(templateMenu);
   Menu.setApplicationMenu(menuPrincipal)
 
+  mainWindow.webContents.openDevTools();
   mainWindow.loadURL(`file://${__dirname}/src/index.html`)
 
 })
