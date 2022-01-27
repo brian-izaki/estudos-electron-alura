@@ -52,7 +52,7 @@ module.exports = {
             {
                 label: 'Window',
                 submenu: [
-                    { role: 'minimize' },
+                    { role: 'minimize', accelerator: 'Alt+M' },
                     { role: 'close' }
                 ]
             },
@@ -63,7 +63,8 @@ module.exports = {
                         label: 'Sobre Alura Timer',
                         click: () => {
                             ipcMain.emit('abrir-janela-sobre')
-                        }
+                        },
+                        accelerator: 'CmdOrControl+I',
                     }
                 ]
             }
