@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Tray, Menu} = require('electron');
+const { app, BrowserWindow, ipcMain, Tray, Menu } = require('electron');
 
 const path = require('path');
 const data = require('./data');
@@ -22,6 +22,27 @@ app.on('ready', () => {
   const templateGenerator = template.geraTrayTemplate(mainWindow);
   let trayMenu = Menu.buildFromTemplate(templateGenerator)
   tray.setContextMenu(trayMenu);
+
+  let templateMenu = [
+    {
+      label: 'Meu menu',
+      submenu: [
+        { label: 'item 1', },
+        { label: 'item 2' },
+        { label: 'item 3' },
+      ]
+    }
+  ]
+  if (process.platform === 'darwin') {
+    templateMenu.unshift({
+      label: app.getName(),
+      submenu: [
+        { label: 'item 1' }
+      ]
+    })
+  }
+  const menuPrincipal = Menu.buildFromTemplate(templateMenu);
+  Menu.setApplicationMenu(menuPrincipal)
 
   mainWindow.loadURL(`file://${__dirname}/src/index.html`)
 
