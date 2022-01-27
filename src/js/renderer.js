@@ -9,12 +9,16 @@ let curso = document.querySelector('.curso');
 let botaoAdicionar = document.querySelector('.botao-adicionar');
 let campoAdicionar = document.querySelector('.campo-adicionar');
 
+let imgs = ['img/play-button.svg', 'img/stop-button.svg']
+let isPlay = false;
+
 window.onload = () => {
   carregaCurso()
 }
 
 window.mainEvents.onTray.selectedCourse(((message) => {
   curso.textContent = message.curso;
+  isPlay && botaoPlay.click();
   carregaCurso()
 }))
 
@@ -22,8 +26,6 @@ link.addEventListener('click', (e) => {
   window.janelas.abrirJanelaSobre()
 })
 
-let imgs = ['img/play-button.svg', 'img/stop-button.svg']
-let isPlay = false;
 botaoPlay.addEventListener('click', (e) => {
   if (isPlay) {
     timer.parar(curso)
@@ -47,6 +49,12 @@ botaoPlay.addEventListener('click', (e) => {
 
 botaoAdicionar.addEventListener('click', () => {
   let novoCurso = campoAdicionar.value.trim();
+
+  if (novoCurso === '') {
+    console.log('Não pode adiiconar um cmapo vazio!')
+    return;
+  }
+
   campoAdicionar.value = '';
 
   curso.textContent = novoCurso;
@@ -61,7 +69,8 @@ async function carregaCurso () {
     
     tempo.textContent = tempoJson.tempoEstudo || '00:00:00';
   } catch (err) {
-    console.error(err)
+    console.error('O curso ainda não possui um Arquivo JSON');
+    tempo.textContent = '00:00:00';
   }
 }
 
