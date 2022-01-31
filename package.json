@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "NODE_ENV=development electron .",
-    "build:linux": "electron-packager . alura-timer --platform=linux --arch=x64 --overwrite --out dist",
+    "build:linux": "electron-packager . alura-timer --platform=linux --arch=x64 --overwrite --out dist --icon=assets/icon.png",
     "build:linux:deb": "npm run build:linux && electron-installer-debian --src dist/alura-timer-linux-x64/ --dest dist/installers/ --arch amd64",
-    "build:win": "electron-packager . alura-timer --platform=win32 --arch=x64 --overwrite --out dist",
-    "build:darwin": "electron-packager . alura-timer --platform=darwin --arch=x64 --overwrite --out dist"
+    "build:win": "electron-packager . alura-timer --platform=win32 --arch=x64 --overwrite --out dist --icon=assets/icon.ico",
+    "build:darwin": "electron-packager . alura-timer --platform=darwin --arch=x64 --overwrite --out dist --icon=assets/icon.icns"
   },
   "keywords": [
     "electron",
